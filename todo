@@ -1,0 +1,9 @@
+- include sessions
+- include password hashing
+
+
+
+- use Docker for db environment
+    - svil
+    - coll
+    - prod
