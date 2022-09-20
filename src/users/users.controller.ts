@@ -32,7 +32,6 @@ export class UsersController {
 
         return user;
     }
-
     @Get()
     async findAllUsers(@Query('email') email: string) {
         return this.userService.find(email)

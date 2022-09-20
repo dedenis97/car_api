@@ -1,14 +1,16 @@
-- include erxception handing 
+- include exception handing 
 
 - include sessions
 
 - include password hashing
 
-- use Docker for db environment
+- use Docker for db environment:
     - svil
     - coll
     - prod
 
-- include test-
+- so write enc files and configure typeorm db connection with a config class
+
+- include test:
     - unit 
 
