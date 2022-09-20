@@ -11,10 +11,10 @@ import { ReportEntity } from './reports/entity/report.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
-      port: 3306,
+      host: '127.0.0.1',
+      port: 3307,
       username: 'root',      
-      password: '92114610',
+      password: 'root',
       database: 'car',
       entities: [UserEntity, ReportEntity],
       synchronize:true,

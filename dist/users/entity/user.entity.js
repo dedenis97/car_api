@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserEntity = void 0;
-const class_transformer_1 = require("class-transformer");
 const typeorm_1 = require("typeorm");
 let UserEntity = class UserEntity {
     logIn() {
@@ -33,7 +32,6 @@ __decorate([
 ], UserEntity.prototype, "email", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    (0, class_transformer_1.Exclude)(),
     __metadata("design:type", String)
 ], UserEntity.prototype, "password", void 0);
 __decorate([

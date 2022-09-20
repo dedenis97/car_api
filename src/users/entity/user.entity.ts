@@ -1,4 +1,3 @@
- import { Exclude } from "class-transformer";
 import { AfterInsert, AfterRemove, AfterUpdate, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -11,7 +10,6 @@ export class UserEntity{
     email:string;
 
     @Column()
-    @Exclude()
     password:string;
 
 
@@ -23,6 +21,7 @@ export class UserEntity{
     // only work with repo.save() and repo.remove()
 
     // execute fn on each insertion in to db
+    
     @AfterInsert()
     logIn(){
         console.log('Inserted user id: ', this.id);
