@@ -1,6 +1,6 @@
 - include exception handing 
 
-- include sessions
+- in session save a jwt
 
 - include password hashing
 
@@ -14,3 +14,5 @@
 - include test:
     - unit 
 
+
+- swagger for try

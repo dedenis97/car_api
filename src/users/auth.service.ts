@@ -1,6 +1,7 @@
 import { BadRequestException, ForbiddenException, HttpException, Injectable, NotFoundException } from "@nestjs/common";
 import { randomBytes, scrypt as _scrypt } from "crypto";
 import { promisify } from "util";
+import { UserEntity } from "./entity/user.entity";
 import { UsersService } from "./users.service";
 
 // transform a call bask js normal fn 
@@ -13,7 +14,7 @@ export class AuthService {
 
     constructor(private usersService: UsersService) { }
 
-    async signUp(email: string, password: string) {
+    async signUp(email: string, password: string){
 
 
         // See if email is in use

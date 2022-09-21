@@ -1,5 +1,5 @@
-import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, Query, UseInterceptors } from '@nestjs/common';
-import { Serialize,  } from 'src/interceptors/serialize.interceptor';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, Query, Session, UseInterceptors } from '@nestjs/common';
+import { Serialize, } from 'src/interceptors/serialize.interceptor';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -12,20 +12,37 @@ export class UsersController {
 
     constructor(private userService: UsersService, private authService: AuthService) { }
 
+    @Get("whoami")
+    who(@Session() session) {
+        return this.userService.findOne(session.userId)
+    }
+
     @Post('/signup')
-    createUser(@Body() body: CreateUserDto) {
-        return this.authService.signUp(body.email, body.password)
+    async createUser(@Body() body: CreateUserDto, @Session() session) {
+        const user = await this.authService.signUp(body.email, body.password)
+
+        session.userId = user.id
+        return user;
     }
 
     @Post('/signin')
-    signup(@Body() body: CreateUserDto) {
-        return this.authService.checkAuth(body.email, body.password)
+    async signup(@Body() body: CreateUserDto, @Session() session) {
+        const user = await this.authService.checkAuth(body.email, body.password)
+
+        session.userId = user.id
+        return user;
     }
+
+    @Post('/signout')
+    signout(@Session() session) {
+        session.userId = null
+    }
+
 
     @Get("/:id")
     async findUser(@Param('id') id: string) {
         const user = await this.userService.findOne(parseInt(id))
-        
+
         if (!user) {
             throw new NotFoundException("User not found")
         }
@@ -47,6 +64,6 @@ export class UsersController {
     @Patch('/:id')
     updateUser(@Body() body: Partial<UpdateUserDto>, @Param('id') id: string) {
         return this.userService.update(parseInt(id), body)
-    }
+    } 
 
 }

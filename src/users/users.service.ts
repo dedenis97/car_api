@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserEntity } from './entity/user.entity';
@@ -10,16 +10,19 @@ export class UsersService {
         @InjectRepository(UserEntity) private repo: Repository<UserEntity>
     ) { }
 
-    create(email: string, password: string) {
+    create(email: string, password: string): Promise<UserEntity> {
 
         const user = this.repo.create({
             email, password
         })
 
-        this.repo.save(user)
+        return this.repo.save(user)
     }
 
     findOne(id: number) {
+        if(id == null ) {
+            throw new BadRequestException("id user null")
+        }
         return this.repo.findOneBy({ id })
     }
 
