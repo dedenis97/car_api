@@ -20,13 +20,12 @@ export class UsersService {
     }
 
     findOne(id: number) {
-        if(id == null ) {
-            throw new BadRequestException("id user null")
+        if (id == null) {
+            return null
         }
+
         return this.repo.findOneBy({ id })
     }
-
-    
 
     find(email: string) {
         return this.repo.findBy({
@@ -57,7 +56,7 @@ export class UsersService {
         return this.repo.remove([user]);
     }
 
-  
+
 
 
 }

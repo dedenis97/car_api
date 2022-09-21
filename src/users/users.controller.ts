@@ -38,7 +38,6 @@ export class UsersController {
         session.userId = null
     }
 
-
     @Get("/:id")
     async findUser(@Param('id') id: string) {
         const user = await this.userService.findOne(parseInt(id))
@@ -64,6 +63,6 @@ export class UsersController {
     @Patch('/:id')
     updateUser(@Body() body: Partial<UpdateUserDto>, @Param('id') id: string) {
         return this.userService.update(parseInt(id), body)
-    } 
+    }
 
 }
