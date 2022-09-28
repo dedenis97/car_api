@@ -33,7 +33,7 @@ export class UsersController {
 
     @Post('/signin')
     async signup(@Body() body: CreateUserDto, @Session() session) {
-        const user = await this.authService.checkAuth(body.email, body.password)
+        const user = await this.authService.signIn(body.email, body.password)
 
         session.userId = user.id
         return user;
