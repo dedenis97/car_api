@@ -21,9 +21,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 				return {
 					type: "mysql",
 					host: '127.0.0.1',
-					port: 3307,
+					port: 3308,
 					username: 'root',
-					password: 'root',
+					password: 'helloworld',
 					database: config.get("DB_NAME"),
 					entities: [UserEntity, ReportEntity],
 					synchronize: true,
