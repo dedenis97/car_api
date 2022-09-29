@@ -6,24 +6,38 @@ import { ReportsModule } from './reports/reports.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from './users/entity/user.entity';
 import { ReportEntity } from './reports/entity/report.entity';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
-  imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: '127.0.0.1',
-      port: 3307,
-      username: 'root',      
-      password: 'root',
-      database: 'car',
-      entities: [UserEntity, ReportEntity],
-      synchronize:true,
-    }),
+	imports: [
+		ConfigModule.forRoot({
+			isGlobal: true,
+			envFilePath: "env/.env." + process.env.NODE_ENV,
+		}),
+		TypeOrmModule.forRootAsync({
+			inject: [ConfigService],
 
-    UsersModule,
-    ReportsModule],
+			useFactory: (config: ConfigService) => {
+				return {
+					type: "mysql",
+					host: '127.0.0.1',
+					port: 3307,
+					username: 'root',
+					password: 'root',
+					database: config.get("DB_NAME"),
+					entities: [UserEntity, ReportEntity],
+					synchronize: true,
 
-  controllers: [AppController],
-  providers: [AppService],
+				}
+			}
+
+		}),
+
+		UsersModule,
+		ReportsModule,
+	],
+
+	controllers: [AppController],
+	providers: [AppService],
 })
 export class AppModule { }
