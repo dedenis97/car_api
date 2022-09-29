@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserEntity } from './entity/user.entity';
@@ -22,7 +22,7 @@ export class UsersService {
             return null
         }
 
-        return this.repo.findOneBy({ id })
+        return this.repo.findOneBy({id})
     }
 
     find(email: string) {

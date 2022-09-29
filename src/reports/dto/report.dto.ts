@@ -27,6 +27,9 @@ export class ReportDto {
     @Expose()
     price: number;
 
+    @Expose()
+    approved: boolean;
+
     // obj is equal to original report entity
     @Transform(({ obj }) =>  obj.user.id )
     @Expose()

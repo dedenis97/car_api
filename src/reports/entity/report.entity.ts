@@ -3,8 +3,12 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class ReportEntity {
+    
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
+
+    @Column({ default: false})
+    approved: boolean;
 
     @Column()
     price: number;
