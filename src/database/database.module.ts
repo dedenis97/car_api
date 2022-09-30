@@ -1,8 +1,11 @@
 import { Module } from "@nestjs/common"
 import { ConfigModule, ConfigService } from "@nestjs/config"
 import { TypeOrmModule } from "@nestjs/typeorm"
-import { ReportEntity } from "src/reports/entity/report.entity"
-import { UserEntity } from "src/users/entity/user.entity"
+import { ReportEntity } from "src/reports/entity/report.entity";
+import { UserEntity } from "src/users/entity/user.entity";
+
+
+const settings = require('../../ormconfig.js');
 
 @Module({
     imports: [
@@ -50,4 +53,8 @@ import { UserEntity } from "src/users/entity/user.entity"
 })
 
 
-export class DatabaseModule { }
+export class DatabaseModule {
+    constructor() {
+        console.log(settings)
+    }
+}
