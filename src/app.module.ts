@@ -28,7 +28,22 @@ const cookieSession = require('cookie-session')
 					password: 'helloworld',
 					database: config.get("DB_NAME"),
 					entities: [UserEntity, ReportEntity],
+					
+					// map the entity to the database
+					// is is 'true'
+
+					// NOT USE this in production!!!!!!
+					// use ONLY in development!!!!!
+
+
 					synchronize: true,
+
+					// Dangerous :
+
+					// if i remove a prop in an entity
+					// typeorm will remove the column and the data inside
+					// from the entity table
+					// so i will lost all the data from the table in that column
 
 				}
 			}
@@ -46,11 +61,13 @@ const cookieSession = require('cookie-session')
 
 export class AppModule {
 
+	constructor(private configService: ConfigService) { }
+
 	configure(consumer: MiddlewareConsumer) {
 		consumer
 			.apply(
 				cookieSession({
-					keys: ['asdasdasd']
+					keys: [this.configService.get("COOKIE_KEY")]
 				}),).forRoutes('*')
 
 	}
