@@ -3,6 +3,18 @@ import { ConfigModule, ConfigService } from "@nestjs/config"
 import { TypeOrmModule } from "@nestjs/typeorm"
 import { ReportEntity } from "src/reports/entity/report.entity";
 import { UserEntity } from "src/users/entity/user.entity";
+ /**
+  * Migration
+  * 
+  * - npm install ts-node --save-dev
+  * 
+  * in package.json ADD:
+    "scripts": {
+        ...
+        "typeorm": "typeorm-ts-node-commonjs"
+    }
+  */
+
 
 
 const settings = require('../../ormconfig.js');
@@ -33,7 +45,7 @@ const settings = require('../../ormconfig.js');
                     // use ONLY in development!!!!!
 
 
-                    synchronize: true,
+                    synchronize: false,
 
                     // Dangerous :
 
@@ -58,3 +70,5 @@ export class DatabaseModule {
         console.log(settings)
     }
 }
+
+
