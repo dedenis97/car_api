@@ -2,17 +2,12 @@
 
 - in session save a jwt
 
-- include password hashing
-
 - use Docker for db environment:
     - svil
     - coll
     - prod
 
-- so write enc files and configure typeorm db connection with a config class
-
 - include test:
     - unit 
-
 
 - swagger for try
