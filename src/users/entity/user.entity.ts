@@ -11,11 +11,14 @@ export class UserEntity {
     email: string;
 
     @Column()
-    password: string; 
+    password: string;
+
+    @Column({ default: true })
+    admin: boolean
+
 
     @OneToMany(() => ReportEntity, (report) => report.user)
     reports: ReportEntity[];
-
 
     // the hook will not executed if at method 'save' in repo
     // this will not be pass, but passed arg like ({email, password})
