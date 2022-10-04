@@ -22,13 +22,12 @@ export class SerializeInterceptor implements NestInterceptor {
             
             map((data: any) => {
 
-                if (data instanceof UserEntity)
+     
                 return plainToClass(this.dto, data, {
                     // share to response onlyu property with @Expose
                     excludeExtraneousValues: true 
                 })
 
-                return data
 
             })
 

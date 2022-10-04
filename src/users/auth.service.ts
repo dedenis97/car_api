@@ -4,6 +4,8 @@ import { promisify } from "util";
 import { UserEntity } from "./entity/user.entity";
 import { UsersService } from "./users.service";
 
+import * as bcrypt from "bcrypt";
+
 // transform a call bask js normal fn 
 // to promise fn
 
@@ -24,18 +26,9 @@ export class AuthService {
             throw new BadRequestException("Email already in use")
         }
 
-        // Hashing the user password
-
-        // - generate a salt 
-        const salt = randomBytes(8).toString("hex")
-
-        // - hash the salt and psw toghether
-        const hash = (await scrypt(password, salt, 32)) as Buffer
-
         // - join them
-        const hashedPassword = salt + "." + hash.toString("hex")
+        const hashedPassword = await bcrypt.hash(password, 12)
 
-        // - save user on db and return it
 
         return this.usersService.create(email, hashedPassword)
 
@@ -48,13 +41,8 @@ export class AuthService {
             throw new NotFoundException("User not found")
         }
 
-        const [salt, storedHash] = user.password.split(".")
-
-        const hash = await scrypt(password, salt, 32) as Buffer
-
-        if (storedHash != hash.toString("hex")) {
+        if (!await bcrypt.compare(password, user.password)) {
             throw new BadRequestException("Bad password")
-
         }
 
         return user;
