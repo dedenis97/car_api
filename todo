@@ -2,12 +2,6 @@
 
 - in session save a jwt
 
-- use Docker for db environment:
-    - svil
-    - coll
-    - prod
-
 - include test:
     - unit 
 
-- swagger for try

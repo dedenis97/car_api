@@ -13,11 +13,8 @@ import { UserEntity } from "src/users/entity/user.entity";
         ...
         "typeorm": "typeorm-ts-node-commonjs"
     }
-  */
+*/
 
-
-
-const settings = require('../../ormconfig.js');
 
 @Module({
     imports: [
@@ -45,7 +42,7 @@ const settings = require('../../ormconfig.js');
                     // use ONLY in development!!!!!
 
 
-                    synchronize: false,
+                    synchronize: true,
 
                     // Dangerous :
 
@@ -65,10 +62,6 @@ const settings = require('../../ormconfig.js');
 })
 
 
-export class DatabaseModule {
-    constructor() {
-        console.log(settings)
-    }
-}
+export class DatabaseModule {}
 
 

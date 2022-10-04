@@ -13,7 +13,7 @@ export class UserEntity {
     @Column()
     password: string;
 
-    @Column({ default: true })
+    @Column({ default: false })
     admin: boolean
 
 
